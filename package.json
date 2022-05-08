@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "react-player": "^2.10.1",
+    "react-router-dom": "^6.3.0",
+    "use-debounce": "^8.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
