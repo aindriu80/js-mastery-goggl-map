@@ -1,8 +1,7 @@
 import React, { useState, useContext, createContext } from 'react';
 
 const ResultContext = createContext();
-const baseUrl =
-  'https://google-search3.p.rapidapi.com/api/v1/search/q=elon+musk';
+const baseUrl = 'https://google-search3.p.rapidapi.com/api/v1';
 
 export const ResultContextProvider = ({ children }) => {
   const [results, setResults] = useState([]);
@@ -13,7 +12,7 @@ export const ResultContextProvider = ({ children }) => {
   const getResults = async (type) => {
     setLoading(true);
 
-    const res = await fetch(`${baseUrl}${url}`, {
+    const res = await fetch(`${baseUrl}${type}`, {
       method: 'GET',
       headers: {
         'X-User-Agent': 'desktop',
@@ -24,6 +23,7 @@ export const ResultContextProvider = ({ children }) => {
     });
 
     const data = await res.json();
+    console.log(data);
 
     setResults(data);
     setLoading(false);
