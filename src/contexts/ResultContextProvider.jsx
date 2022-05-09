@@ -6,14 +6,14 @@ const baseUrl =
 
 export const ResultContextProvider = ({ children }) => {
   const [results, setResults] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
   // /videos, /search, /images
   const getResults = async (type) => {
-    setIsLoading(true);
+    setLoading(true);
 
-    const response = await fetch(`${baseUrl}${type}`, {
+    const res = await fetch(`${baseUrl}${url}`, {
       method: 'GET',
       headers: {
         'X-User-Agent': 'desktop',
@@ -23,18 +23,17 @@ export const ResultContextProvider = ({ children }) => {
       },
     });
 
-    const data = await response.json();
+    const data = await res.json();
 
     setResults(data);
-    setIsLoading(false);
+    setLoading(false);
   };
 
   return (
     <ResultContext.Provider
-      value={{ results, searchTerm, setSearchTerm, isLoading }}
+      value={{ getResults, results, searchTerm, setSearchTerm, loading }}
     >
-      {' '}
-      {children}{' '}
+      {children}
     </ResultContext.Provider>
   );
 };
