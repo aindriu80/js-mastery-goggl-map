@@ -26,7 +26,7 @@ export const Results = () => {
     case '/search':
       return (
         <div className='flex flex-wrap justify-between space-y-6 sm:px-56'>
-          {results?.map(({ link, title }, index) => (
+          {results?.results?.map(({ link, title }, index) => (
             <div key={index} className='md:w-2/5 w-full'>
               <a href={link} target='_blank' rel='noreferrer'>
                 <p className='text-sm'>
@@ -84,7 +84,21 @@ export const Results = () => {
       );
 
     case '/videos':
-      return 'SEARCH';
+      return (
+        <div className='flex flex-wrap'>
+          {results?.results.map((video, index) => (
+            <div key={index} className='p-2'>
+              <ReactPlayer
+                url={video.additional_links[0].href}
+                controls
+                width='355px'
+                height='200px'
+              />
+            </div>
+          ))}
+        </div>
+      );
+
     default:
       return 'ERROR';
   }
