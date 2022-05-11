@@ -6,12 +6,7 @@ import { useResultContext } from '../contexts/ResultContextProvider';
 import Loading from './Loading';
 
 export const Results = () => {
-  const {
-    results: { results, image_results, entries: news },
-    isLoading,
-    getResults,
-    searchTerm,
-  } = useResultContext();
+  const { results, isLoading, getResults, searchTerm } = useResultContext();
   const location = useLocation();
 
   useEffect(() => {
@@ -49,7 +44,7 @@ export const Results = () => {
     case '/images':
       return (
         <div className='flex flex-wrap justify-center items-center'>
-          {image_results?.map(({ image, link: { href, title } }, index) => (
+          {results?.map(({ image, link: { href, title } }, index) => (
             <a
               className='sm:p-3 p-5'
               href={href}

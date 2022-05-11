@@ -23,7 +23,14 @@ export const ResultContextProvider = ({ children }) => {
     });
 
     const data = await res.json();
-    console.log(data);
+
+    if (type.includes === '/news') {
+      setResults(data.entreis);
+    } else if (type.includes('/images')) {
+      setResults(data.image_results);
+    } else {
+      setResults(data.results);
+    }
 
     setResults(data);
     setLoading(false);
