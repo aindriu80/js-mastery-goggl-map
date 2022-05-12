@@ -1,12 +1,12 @@
 import React, { useState, useContext, createContext } from 'react';
-
 const ResultContext = createContext();
 const baseUrl = 'https://google-search3.p.rapidapi.com/api/v1';
-
 export const ResultContextProvider = ({ children }) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('Javascript');
+  const apiKEY = import.meta.env.VITE_API_KEY;
+  console.log('API Key: ', apiKEY);
 
   // /videos, /search, /images
   const getResults = async (type) => {
@@ -18,19 +18,11 @@ export const ResultContextProvider = ({ children }) => {
         'X-User-Agent': 'desktop',
         'X-Proxy-Location': 'EU',
         'X-RapidAPI-Host': 'google-search3.p.rapidapi.com',
-        'X-RapidAPI-Key': '55f3b96f6cmshe0869210d2933b1p18c583jsn2825fad616f0',
+        'X-RapidAPI-Key': apiKEY,
       },
     });
 
     const data = await res.json();
-
-    if (type.includes === '/news') {
-      setResults(data.entreis);
-    } else if (type.includes('/images')) {
-      setResults(data.image_results);
-    } else {
-      setResults(data.results);
-    }
 
     setResults(data);
     setLoading(false);
